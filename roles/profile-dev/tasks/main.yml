@@ -1,0 +1,70 @@
+---
+- name: Install dev brew applications
+  community.general.homebrew:
+    path: "/opt/homebrew/bin"
+    name:
+      - autoconf
+      - automake
+      - bat
+      - bottom
+      - broot
+      - brotli
+      - btop
+      - ctop
+      - cmake
+      - coreutils
+      - cowsay
+      - ctags
+      - curl
+      - dos2unix
+      - dust
+      - entr
+      - exa
+      - fd
+      - figlet
+      - fzf
+      - gcc
+      - gh
+      - graphviz
+      - grep
+      - hexyl
+      - hugo
+      - hyperfine
+      - imagemagick
+      - jq
+      - llvm
+      - lnav
+      - lsd
+      - nasm
+      - ncdu
+      - netcat
+      - nmap
+      - nnn
+      - openssl
+      - pandoc
+      - parallel
+      - pkg-config
+      - procs
+      - qrencode
+      - readline
+      - ripgrep
+      - sk
+      - sqlite
+      - starship
+      - telnet
+      - tmux
+      - tokei
+      - tree
+      - wget
+      - xz
+      - youtube-dl
+      - zlib
+      - zstd
+
+- name: Install dev cask applications
+  community.general.homebrew_cask:
+    path: "/opt/homebrew/bin"
+    name:
+      - iterm2
+      - kitty
+      - visual-studio-code

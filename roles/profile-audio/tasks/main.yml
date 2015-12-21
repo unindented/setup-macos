@@ -1,0 +1,13 @@
+---
+- name: Install audio brew applications
+  community.general.homebrew:
+    path: "/opt/homebrew/bin"
+    name:
+      - flac
+      - lame
+
+- name: Install audio cask applications
+  community.general.homebrew_cask:
+    path: "/opt/homebrew/bin"
+    name:
+      - foobar2000

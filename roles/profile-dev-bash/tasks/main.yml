@@ -1,0 +1,8 @@
+---
+- name: Install bash brew applications
+  community.general.homebrew:
+    path: "/opt/homebrew/bin"
+    name:
+      - bash
+      - bash-completion
+      - shellcheck

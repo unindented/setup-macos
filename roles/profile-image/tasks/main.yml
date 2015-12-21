@@ -1,0 +1,6 @@
+---
+- name: Install image cask applications
+  community.general.homebrew_cask:
+    path: "/opt/homebrew/bin"
+    name:
+      - krita

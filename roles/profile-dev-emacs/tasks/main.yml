@@ -1,0 +1,15 @@
+---
+- name: Tap for emacs-mac
+  community.general.homebrew_tap:
+    path: "/opt/homebrew/bin"
+    name:
+      - railwaycat/emacsmacport
+
+- name: Install Emacs brew applications
+  community.general.homebrew:
+    path: "/opt/homebrew/bin"
+    name:
+      - emacs-mac
+    options:
+      - with-modules
+      - with-native-compilation

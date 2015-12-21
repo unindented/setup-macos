@@ -1,0 +1,10 @@
+---
+- name: Install misc dev brew applications
+  community.general.homebrew:
+    path: "/opt/homebrew/bin"
+    name:
+      - deno
+      - elixir
+      - ghcup
+      - go
+      - guile

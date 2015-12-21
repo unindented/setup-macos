@@ -1,0 +1,57 @@
+---
+- hosts: 127.0.0.1
+  connection: local
+
+  pre_tasks:
+    - name: Clone dotfiles
+      ansible.builtin.git:
+        repo: https://github.com/unindented/dotfiles.git
+        dest: ~/.dotfiles
+        recursive: yes
+        accept_hostkey: yes
+
+    - name: Install dotfiles
+      shell: ./install.sh
+      args:
+        chdir: ~/.dotfiles
+
+  post_tasks:
+    - name: Hide dock without delay
+      shell: defaults write com.apple.Dock autohide-delay -float 0
+    - name: Hide dock faster
+      shell: defaults write com.apple.dock autohide-time-modifier -float 0.15
+    - name: Restart dock
+      shell: killall Dock
+    - name: Disable swipe gestures for Chrome
+      shell: defaults write com.google.Chrome.plist AppleEnableSwipeNavigateWithScrolls -bool FALSE
+    - name: Set host name
+      become: yes
+      shell: scutil --set HostName {{ computername }}
+    - name: Set local host name
+      become: yes
+      shell: scutil --set LocalHostName {{ computername }}
+    - name: Set computer name
+      become: yes
+      shell: scutil --set ComputerName {{ computername }}
+
+  roles:
+    - profile-audio
+    - profile-image
+    - profile-video
+    - profile-gaming
+    - profile-dev-bash
+    - profile-dev-browser
+    - profile-dev-gaming
+    - profile-dev-emacs
+    - profile-dev-vim
+    - profile-dev-node
+    - profile-dev-perl
+    - profile-dev-python
+    - profile-dev-ruby
+    - profile-dev-rust
+    - profile-dev-java
+    - profile-dev-misc
+
+  vars_prompt:
+    - name: computername
+      prompt: Computer name

@@ -1,0 +1,24 @@
+---
+- name: Install nvm
+  ansible.builtin.git: repo=https://github.com/creationix/nvm.git dest=~/.nvm
+
+- name: Install {{ nvm.node_version }}
+  shell: source ~/.nvm/nvm.sh && nvm install {{ nvm.node_version }}
+  register: nvm_install_result
+  changed_when: "'is already installed' not in nvm_install_result.stdout"
+
+- name: Check if {{ nvm.node_version }} is the default Node version
+  shell: source ~/.nvm/nvm.sh && nvm ls | grep -e 'default.*{{ nvm.node_version }}'
+  register: nvm_check_default
+  changed_when: no
+  ignore_errors: yes
+
+- name: Set default Node version to {{ nvm.node_version }}
+  shell: source ~/.nvm/nvm.sh && nvm alias default {{ nvm.node_version }}
+  when: nvm_check_default is failed
+
+- name: Install Node applications
+  community.general.homebrew:
+    path: "/opt/homebrew/bin"
+    name:
+      - watchman

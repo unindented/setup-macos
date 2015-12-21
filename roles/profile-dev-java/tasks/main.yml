@@ -1,0 +1,14 @@
+---
+- name: Install Java cask applications
+  community.general.homebrew_cask:
+    path: "/opt/homebrew/bin"
+    name:
+      - microsoft-openjdk11
+      - microsoft-openjdk
+      - android-studio
+
+- name: Install Java brew applications
+  community.general.homebrew:
+    path: "/opt/homebrew/bin"
+    name:
+      - gradle

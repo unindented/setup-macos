@@ -1,0 +1,7 @@
+---
+- name: Install gaming cask applications
+  community.general.homebrew_cask:
+    path: "/opt/homebrew/bin"
+    name:
+      - epic-games
+      - steam

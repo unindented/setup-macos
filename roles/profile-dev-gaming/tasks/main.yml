@@ -1,0 +1,9 @@
+---
+- name: Install game dev cask applications
+  community.general.homebrew_cask:
+    path: "/opt/homebrew/bin"
+    name:
+      - blender
+      - defold
+      - love
+      - magicavoxel

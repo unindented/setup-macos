@@ -1,0 +1,17 @@
+---
+- name: Install browser brew applications
+  community.general.homebrew:
+    path: "/opt/homebrew/bin"
+    name:
+      - emscripten
+      - mozjpeg
+      - wabt
+      - webp
+
+- name: Install browser cask applications
+  community.general.homebrew_cask:
+    path: "/opt/homebrew/bin"
+    name:
+      - charles
+      - imagealpha
+      - imageoptim

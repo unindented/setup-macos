@@ -1,0 +1,66 @@
+---
+- name: Install homebrew arm64
+  shell: '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
+  args:
+    creates: /opt/homebrew/bin/brew
+
+- name: Install homebrew i386
+  shell: 'arch -x86_64 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
+  args:
+    creates: /usr/local/bin/brew
+
+- name: Taps for all users
+  community.general.homebrew_tap:
+    path: "/opt/homebrew/bin"
+    name:
+      - homebrew/services
+      - homebrew/cask-fonts
+      - homebrew/cask-versions
+
+- name: Install brew applications for all users
+  community.general.homebrew:
+    path: "/opt/homebrew/bin"
+    name:
+      - git
+      - lazygit
+      - mas
+      - svn
+      - syncthing
+
+- name: Install cask applications for all users
+  community.general.homebrew_cask:
+    path: "/opt/homebrew/bin"
+    name:
+      - appcleaner
+      - authy
+      - blockblock
+      - discord
+      - figma
+      - firefox
+      - font-cascadia-code
+      - font-cascadia-code-pl
+      - font-cascadia-mono
+      - font-cascadia-mono-pl
+      - font-caskaydia-cove-nerd-font
+      - font-roboto
+      - font-roboto-mono
+      - font-roboto-slab
+      - font-source-sans-pro
+      - font-source-serif-pro
+      - google-chrome
+      - gpg-suite
+      - kap
+      - knockknock
+      - netnewswire
+      - obsidian
+      - onyx
+      - rectangle
+      - the-unarchiver
+      - transmission
+      - zoom
+
+- name: Install MAS applications for all users
+  community.general.mas:
+    id:
+      - 1137397744 # Bitwarden
+      - 1451685025 # WireGuard

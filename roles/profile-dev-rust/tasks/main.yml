@@ -1,0 +1,9 @@
+---
+- name: Download rustup
+  ansible.builtin.get_url:
+    url: https://sh.rustup.rs
+    dest: /tmp/rustup.sh
+    mode: 0700
+
+- name: Install rustup
+  shell: /tmp/rustup.sh -y

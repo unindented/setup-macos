@@ -1,0 +1,21 @@
+---
+- name: Install rbenv
+  ansible.builtin.git: repo=https://github.com/rbenv/rbenv.git dest=~/.rbenv
+
+- name: Install ruby-build as an rbenv plugin
+  ansible.builtin.git: repo=https://github.com/rbenv/ruby-build.git dest=~/.rbenv/plugins/ruby-build
+
+- name: Install {{ rbenv.ruby_version }}
+  shell: ~/.rbenv/bin/rbenv install --skip-existing {{ rbenv.ruby_version }}
+  register: rbenv_install_result
+  changed_when: "'' == rbenv_install_result.stdout"
+
+- name: Check if {{ rbenv.ruby_version }} is the default Ruby version
+  shell: ~/.rbenv/bin/rbenv global | grep -e '{{ rbenv.ruby_version }}'
+  register: rbenv_check_default
+  changed_when: no
+  ignore_errors: yes
+
+- name: Set default Ruby version to {{ rbenv.ruby_version }}
+  shell: ~/.rbenv/bin/rbenv global {{ rbenv.ruby_version }}
+  when: rbenv_check_default is failed

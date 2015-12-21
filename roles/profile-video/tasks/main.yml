@@ -1,0 +1,18 @@
+---
+- name: Install video brew applications
+  community.general.homebrew:
+    path: "/opt/homebrew/bin"
+    name:
+      - ffmpeg
+
+- name: Install video cask applications
+  community.general.homebrew_cask:
+    path: "/opt/homebrew/bin"
+    name:
+      - handbrake
+      - vlc
+
+- name: Install video MAS applications
+  community.general.mas:
+    id:
+      - 571213070 # DaVinci Resolve

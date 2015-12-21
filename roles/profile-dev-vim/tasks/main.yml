@@ -1,0 +1,7 @@
+---
+- name: Install Vim brew applications
+  community.general.homebrew:
+    path: "/opt/homebrew/bin"
+    name:
+      - macvim
+      - neovim
